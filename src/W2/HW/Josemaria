@@ -1,0 +1,23 @@
+#Set the seed for reproductibility
+set.seed(123)
+#Number of spins
+num_spins <- 1000
+#Spinner probabilities
+spinner_probs <- c(0.25, 0.25, 0.25, 0.25) #Values 1, 2, 3, 4
+#Fair die probabilities
+fair_die_probs <- rep(1/6, 6) #Fair die has equal probabilities
+#weigjted die probabilities
+weighted_die_probs <- c(1/3, 2/3) #Even rolls are twice as likely as odd rolls
+#Perform spins
+spins <- sample(1:4, num_spins, replace = TRUE, prob = spinner_probs)
+#Initialize empty data frames
+df <- data.frame(Spin = spins, Die1 = NA, Die2 = NA, Die = NA)
+#Use the ifelse to determine which die to roll based on the spinner
+df$Die1 <- ifelse(df$Spin == 1, sample(1:6, num_spins, replace = TRUE, prob = fair_die_probs), NA)
+df$Die2 <- ifelse(df$Spin %in% c(2, 3, 4), sample(1:6, num_spins, replace = TRUE, prob = weighted_die_probs), NA)
+#Combine Die1 and Die2 into Die based on SPinner value
+df$Die <- ifelse(df$Spin == 1, df$Die1, df$Die2)
+#Calculate the probability of getting a 3 on the random die roll
+probability_of_3 <- sum(df$Die == 3) / num_spins
+#Print probability
+cat("The probability of rolling a 3 on the random die roll is:", probability_of_3, "\n")
