@@ -19,3 +19,8 @@ Upload files
 2. git add: add each file in git status
 3. git commit -m 'Short description'
 4. git push
+
+# How to open a github codespace?
+1. Go to button code
+2. Go to section codespaces
+3. Click on the title of your favorite codespace
